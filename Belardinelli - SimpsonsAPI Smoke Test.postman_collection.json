@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "127ab791-3d64-44d6-87d5-6e4ab30d4e2d",
+		"name": "SimpsonsAPI Smoke Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49549288",
+		"_collection_link": "https://belardinelli-marianela-9008891.postman.co/workspace/Marianela-Belardinelli's-Worksp~294952c8-0e0d-4c9c-8d1b-c6e247acef08/collection/49549288-127ab791-3d64-44d6-87d5-6e4ab30d4e2d?action=share&source=collection_link&creator=49549288"
+	},
+	"item": [
+		{
+			"name": "Get Characters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json().results; \r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has at least one character\", () => {\r",
+							"    pm.expect(jsonData.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"First character has required fields\", () => {\r",
+							"    const first = jsonData[0];\r",
+							"    pm.expect(first).to.have.property(\"id\");\r",
+							"    pm.expect(first).to.have.property(\"name\");\r",
+							"    pm.expect(first).to.have.property(\"age\");\r",
+							"    pm.expect(first).to.have.property(\"gender\");\r",
+							"    pm.expect(first).to.have.property(\"occupation\");\r",
+							"    pm.expect(first).to.have.property(\"portrait_path\");\r",
+							"    pm.expect(first).to.have.property(\"phrases\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/characters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Character by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json(); \r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Character object has required fields\", () => {\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"age\");\r",
+							"    pm.expect(jsonData).to.have.property(\"gender\");\r",
+							"    pm.expect(jsonData).to.have.property(\"occupation\");\r",
+							"    pm.expect(jsonData).to.have.property(\"portrait_path\");\r",
+							"    pm.expect(jsonData).to.have.property(\"phrases\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Character ID matches requested ID\", () => {\r",
+							"    pm.expect(jsonData.id).to.eql(1); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/characters/4",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"characters",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Episodes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json().results; \r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has at least one episode\", () => {\r",
+							"    pm.expect(jsonData.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"First episode has required fields\", () => {\r",
+							"    const first = jsonData[0];\r",
+							"    pm.expect(first).to.have.property(\"id\");\r",
+							"    pm.expect(first).to.have.property(\"airdate\");\r",
+							"    pm.expect(first).to.have.property(\"episode_number\");\r",
+							"    pm.expect(first).to.have.property(\"image_path\");\r",
+							"    pm.expect(first).to.have.property(\"name\");\r",
+							"    pm.expect(first).to.have.property(\"season\");\r",
+							"    pm.expect(first).to.have.property(\"synopsis\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/episodes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"episodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Episode by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json(); \r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Episode object has required fields\", () => {\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"airdate\");\r",
+							"    pm.expect(jsonData).to.have.property(\"episode_number\");\r",
+							"    pm.expect(jsonData).to.have.property(\"image_path\");\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"season\");\r",
+							"    pm.expect(jsonData).to.have.property(\"synopsis\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Episode ID matches requested ID\", () => {\r",
+							"    pm.expect(jsonData.id).to.eql(15); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/episodes/15",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"episodes",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Locations Pagination",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"const results = response.results;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));\r",
+							"pm.test(\"Response is JSON\", () => pm.response.to.be.json);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Pagination metadata exists\", () => {\r",
+							"    pm.expect(response).to.have.property(\"count\");\r",
+							"    pm.expect(response).to.have.property(\"pages\");\r",
+							"    pm.expect(response).to.have.property(\"next\");\r",
+							"    pm.expect(response).to.have.property(\"prev\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Each page has 20 items (except possibly last page)\", () => {\r",
+							"    if (response.next !== null) {\r",
+							"        pm.expect(results.length).to.eql(20);\r",
+							"    } else {\r",
+							"        pm.expect(results.length).to.be.at.most(20);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Prev is null on first page, not null on other pages\", () => {\r",
+							"    const url = pm.request.url.toString();\r",
+							"    const pageMatch = url.match(/page=(\\d+)/);\r",
+							"    const pageNumber = pageMatch ? parseInt(pageMatch[1]) : 1;\r",
+							"    if (pageNumber === 1) {\r",
+							"        pm.expect(response.prev).to.be.null;\r",
+							"    } else {\r",
+							"        pm.expect(response.prev).to.not.be.null;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/locations?page=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"locations"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Locations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json().results; \r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has at least one location\", () => {\r",
+							"    pm.expect(jsonData.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"First location has required fields\", () => {\r",
+							"    const first = jsonData[0];\r",
+							"    pm.expect(first).to.have.property(\"id\");\r",
+							"    pm.expect(first).to.have.property(\"name\");\r",
+							"    pm.expect(first).to.have.property(\"image_path\");\r",
+							"    pm.expect(first).to.have.property(\"town\");\r",
+							"    pm.expect(first).to.have.property(\"use\");\r",
+							"    \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/locations",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"locations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Locations by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json(); \r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is JSON\", () => {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Location object has required fields\", () => {\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"image_path\");\r",
+							"    pm.expect(jsonData).to.have.property(\"town\");\r",
+							"    pm.expect(jsonData).to.have.property(\"use\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Location ID matches requested ID\", () => {\r",
+							"    pm.expect(jsonData.id).to.eql(15); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/locations/3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"locations",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
